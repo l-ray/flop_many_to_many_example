@@ -3,10 +3,6 @@ defmodule MCVE do
 
   alias MCVE.{App, Tag, AppTag}
 
-  def hello do
-    :world
-  end
-
   def list_apps_by_flop(flop) do
     apps_query =
       from(a in App,
@@ -16,7 +12,6 @@ defmodule MCVE do
         left_join: t in assoc(at, :tag),
         as: :tag,
         on: t.id == at.tag_id,
-        # select: %{ a },
         preload: [tags: {at, tag: t}]
       )
 
